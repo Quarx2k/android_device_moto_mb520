@@ -1,0 +1,36 @@
+ICS for Motorola Bravo (Android 4.0.1 CM9)
+
+
+Download:
+=========
+
+repo init -u git://github.com/CyanogenKobe/android.git -b ics
+
+repo sync
+
+
+Download RomManager (DELETED IN BUILD)
+======================================
+
+mkdir vendor/cyanogen/proprietary
+cd vendor/cyanogen && ./get-rommanager
+
+
+Build:
+======
+
+rm -rf out/target
+
+For CM9 branch :
+  source build/envsetup.sh && brunch kobe
+
+or for AOSP :
+  source build/envsetup.sh && lunch full_kobe-eng
+  mka bacon
+
+Use the signed zip to update the defy with the bootmenu recovery, not the ota package !
+
+Links:
+======
+
+
