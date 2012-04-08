@@ -3,7 +3,7 @@ ifeq (${TOP},)
   TOP := ../../../..
 endif
 
-PRODUCT := jordan
+PRODUCT := kobe
 
 all: exe
 

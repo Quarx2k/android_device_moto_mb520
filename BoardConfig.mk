@@ -24,15 +24,12 @@
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
 
-# Model variant (DEFY_FROYO, DEFY_GINGER, DEFY_PLUS)
-BOARD_DEFY_MODEL := DEFY_FROYO
-
 BOARD_USES_GENERIC_AUDIO := false
 
 TARGET_NO_RADIOIMAGE := true
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_PREINSTALL := true
-TARGET_BOOTLOADER_BOARD_NAME := jordan
+TARGET_BOOTLOADER_BOARD_NAME := kobe
 
 # Board properties
 TARGET_BOARD_PLATFORM := omap3
@@ -69,10 +66,10 @@ BOARD_HOSTAPD_DRIVER_NAME   := wilink
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
-TARGET_CUSTOM_BLUEDROID := ../../../device/motorola/jordan/bluedroid.c
+TARGET_CUSTOM_BLUEDROID := ../../../device/moto/kobe/bluedroid.c
 
 # Usb Specific
-BOARD_CUSTOM_USB_CONTROLLER := ../../device/motorola/jordan/UsbController.cpp
+BOARD_CUSTOM_USB_CONTROLLER := ../../device/moto/kobe/UsbController.cpp
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 BOARD_MASS_STORAGE_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/usb_mass_storage/lun0/file"
@@ -84,7 +81,7 @@ BOARD_RECOVERYIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x00500000)
 BOARD_SYSTEMIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x07500000)
 BOARD_USERDATAIMAGE_MAX_SIZE := $(call image-size-from-data-size,0x04ac0000)
 BOARD_FLASH_BLOCK_SIZE := 131072
-TARGET_CUSTOM_RELEASETOOL := ./device/motorola/jordan/releasetools/squisher
+TARGET_CUSTOM_RELEASETOOL := ./device/moto/kobe/releasetools/squisher
 
 # OMX Stuff
 HARDWARE_OMX := true
@@ -109,7 +106,7 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_HAS_SMALL_RECOVERY := true
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_NEVER_UMOUNT_SYSTEM := true
-BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/motorola/jordan/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING:= ../../device/moto/kobe/recovery_keys.c
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext3
 TARGET_USERIMAGES_USE_EXT4 := false
 #TARGET_RECOVERY_UI_LIB := librecovery_ui_generic
@@ -124,7 +121,7 @@ TARGET_RECOVERY_PRE_COMMAND_CLEAR_REASON := true
 
 # Egl Specific
 USE_OPENGL_RENDERER := false
-BOARD_EGL_CFG := device/motorola/jordan/egl.cfg
+BOARD_EGL_CFG := device/moto/kobe/egl.cfg
 DEFAULT_FB_NUM := 0
 BOARD_USE_YUV422I_DEFAULT_COLORFORMAT := true
 BOARD_NO_RGBX_8888 := true

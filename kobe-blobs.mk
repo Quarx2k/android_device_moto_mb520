@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-DEVICE_PREBUILT := device/motorola/jordan/prebuilt
+DEVICE_PREBUILT := device/moto/kobe/prebuilt
 
 #temporary cm9 bootanimation
 PRODUCT_COPY_FILES += \
@@ -35,13 +35,13 @@ PRODUCT_COPY_FILES += \
 	$(DEVICE_PREBUILT)/usr/qwerty.kl:system/usr/keylayout/qwerty.kl \
 	$(DEVICE_PREBUILT)/usr/qwerty.kl:system/usr/keylayout/qtouch-touchscreen.kl \
 	$(DEVICE_PREBUILT)/usr/keypad.kl:system/usr/keylayout/sholes-keypad.kl \
-	$(DEVICE_PREBUILT)/usr/keypad.kl:system/usr/keylayout/umts_jordan-keypad.kl \
+	$(DEVICE_PREBUILT)/usr/keypad.kl:system/usr/keylayout/umts_kobe-keypad.kl \
 	$(DEVICE_PREBUILT)/usr/cpcap-key.kl:system/usr/keylayout/cpcap-key.kl \
 	$(DEVICE_PREBUILT)/usr/keychars/cpcap-key.kcm:system/usr/keychars/cpcap-key.kcm 
 
 
 PRODUCT_COPY_FILES += \
-	device/motorola/jordan/bootmenu/recovery/recovery.fstab:system/etc/recovery.fstab \
+	device/moto/kobe/bootmenu/recovery/recovery.fstab:system/etc/recovery.fstab \
 	$(DEVICE_PREBUILT)/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
 	$(DEVICE_PREBUILT)/etc/init.d/02ipv6:system/etc/init.d/02ipv6 \
 	$(DEVICE_PREBUILT)/etc/init.d/03firstboot:system/etc/init.d/03firstboot \
@@ -60,16 +60,16 @@ PRODUCT_COPY_FILES += \
 	$(DEVICE_PREBUILT)/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
 	$(DEVICE_PREBUILT)/etc/gpsconfig.xml:system/etc/gpsconfig.xml \
 	$(DEVICE_PREBUILT)/etc/location.cfg:system/etc/location.cfg \
-	device/motorola/jordan/vold.fstab:system/etc/vold.fstab \
-	device/motorola/jordan/media_profiles.xml:system/etc/media_profiles.xml \
-	device/motorola/jordan/modules/modules.alias:system/lib/modules/modules.alias \
-	device/motorola/jordan/modules/modules.dep:system/lib/modules/modules.dep \
+	device/moto/kobe/vold.fstab:system/etc/vold.fstab \
+	device/moto/kobe/media_profiles.xml:system/etc/media_profiles.xml \
+	device/moto/kobe/modules/modules.alias:system/lib/modules/modules.alias \
+	device/moto/kobe/modules/modules.dep:system/lib/modules/modules.dep \
 
 
 ifdef CM_RELEASE
-	PRODUCT_COPY_FILES += device/motorola/jordan/custom_backup_release.txt:system/etc/custom_backup_list.txt
+	PRODUCT_COPY_FILES += device/moto/kobe/custom_backup_release.txt:system/etc/custom_backup_list.txt
 else
-	PRODUCT_COPY_FILES += device/motorola/jordan/custom_backup_list.txt:system/etc/custom_backup_list.txt
+	PRODUCT_COPY_FILES += device/moto/kobe/custom_backup_list.txt:system/etc/custom_backup_list.txt
 endif
 
-#end of jordan-blobs.mk
+#end of kobe-blobs.mk

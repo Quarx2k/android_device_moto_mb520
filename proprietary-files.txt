@@ -1,4 +1,4 @@
-# Sample file to extract required files from an original Motorola Defy Device
+# Sample file to extract required files from an original Motorola Bravo Device
 # This script is not required if you have the proprietary repository
 #
 # This file is the file list used by extract-files.sh
@@ -49,7 +49,7 @@ lib/dsp/wmv9dec_sn.dll64P
 lib/egl/libEGL_POWERVR_SGX530_125.so
 lib/egl/libGLESv1_CM_POWERVR_SGX530_125.so
 lib/egl/libGLESv2_POWERVR_SGX530_125.so
-lib/hw/gps.jordan.so
+lib/hw/gps.kobe.so
 lib/hw/gralloc.omap3.so
 lib/libarcsoft.so
 #lib/libaudio.so

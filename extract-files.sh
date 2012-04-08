@@ -1,7 +1,7 @@
 #!/bin/sh
 
 VENDOR=motorola
-DEVICE=jordan
+DEVICE=kobe
 
 BASE=../../../vendor/$VENDOR/$DEVICE/proprietary
 rm -rf $BASE/*

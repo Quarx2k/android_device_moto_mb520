@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "AudioPolicyJordan"
+#define LOG_TAG "AudioPolicyKobe"
 #define LOG_NDEBUG 0
 #include <utils/Log.h>
 
@@ -26,7 +26,7 @@ namespace android_audio_legacy {
 
 
 // ----------------------------------------------------------------------------
-// AudioPolicyManager for jordan platform
+// AudioPolicyManager for kobe platform
 // Common audio policy manager code is implemented in AudioPolicyManagerBase class
 // ----------------------------------------------------------------------------
 

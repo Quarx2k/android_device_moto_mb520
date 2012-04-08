@@ -31,7 +31,7 @@
  */
 
 #define LOG_TAG "CameraHAL"
-//#define LOG_NDEBUG 0
+#define LOG_NDEBUG 0
 #define LOG_FULL_PARAMS
 //#define LOG_EACH_FRAMES
 
@@ -48,7 +48,7 @@ using namespace std;
 
 #include "CameraHardwareInterface.h"
 
-#define YUV_CAM_FORMAT CameraParameters::PIXEL_FORMAT_YUV422I
+//#define YUV_CAM_FORMAT CameraParameters::PIXEL_FORMAT_YUV422I
 
 #define DISPLAY_RGB565
 
@@ -61,7 +61,7 @@ using namespace std;
 #endif
 
 //Atrix :
-//#define YUV_CAM_FORMAT CameraParameters::PIXEL_FORMAT_YUV420P
+#define YUV_CAM_FORMAT CameraParameters::PIXEL_FORMAT_YUV420P
 
 /* Prototypes and extern functions. */
 extern "C" android::sp<android::CameraHardwareInterface> HAL_openCameraHardware(int cameraId);
@@ -513,36 +513,39 @@ void CameraHAL_FixupParams(struct camera_device * device, CameraParameters &sett
      * it advertises so, but then sends "yuv422i-yuyv"
      * But nvidia tegra ones does...
      */
+LOGE("CameraParameters::KEY_VIDEO_FRAME_FORMAT, YUV_CAM_FORMAT");
     settings.set(CameraParameters::KEY_VIDEO_FRAME_FORMAT, YUV_CAM_FORMAT);
+LOGE("CameraParameters::KEY_SUPPORTED_PREVIEW_FORMATS, YUV_CAM_FORMAT)");
     settings.set(CameraParameters::KEY_SUPPORTED_PREVIEW_FORMATS, YUV_CAM_FORMAT);
+LOGE("YUV_CAM_FORMAT");
     settings.setPreviewFormat(YUV_CAM_FORMAT);
-
+LOGE("preview-size-values");
     if (!settings.get("preview-size-values"))
-        settings.set("preview-size-values", "176x144,320x240,352x288,480x360,640x480,848x480");
-
+        settings.set("preview-size-values", "320x240,352x288,640x480");
+LOGE("picture-size-values");
     if (!settings.get("picture-size-values"))
-        settings.set("picture-size-values", "320x240,640x480,1280x960,1600x1200,2048x1536,2592x1456,2592x1936");
+        settings.set("picture-size-values", "176x144,320x240,640x480,1280x960,1600x1200,2048x1536");
 
-    if (!settings.get("mot-video-size-values"))
-        settings.set("mot-video-size-values", "176x144,320x240,352x288,640x480,848x480");
+   // if (!settings.get("mot-video-size-values"))
+    //    settings.set("mot-video-size-values", "176x144,320x240,352x288,640x480,848x480");
 
     //LibSOCJordanCamera( 2113): Failed substring capabilities check, unsupported parameter newparam=on parseTable[i].key=focus-mode,currparam=auto
-    const char *str_focus = settings.get(android::CameraParameters::KEY_FOCUS_MODE);
-    if (strcmp(str_focus, "on") == 0) {
-        settings.set(android::CameraParameters::KEY_FOCUS_MODE, "auto");
-    }
+  //  const char *str_focus = settings.get(android::CameraParameters::KEY_FOCUS_MODE);
+  //  if (strcmp(str_focus, "on") == 0) {
+  //      settings.set(android::CameraParameters::KEY_FOCUS_MODE, "auto");
+ //   }
 
     /* defy: focus locks the camera, but dunno how to disable it... */
     if (!settings.get(android::CameraParameters::KEY_SUPPORTED_FOCUS_MODES))
-        settings.set(android::CameraParameters::KEY_SUPPORTED_FOCUS_MODES, "auto,macro,fixed,infinity,off");
+        settings.set(android::CameraParameters::KEY_SUPPORTED_FOCUS_MODES, "auto,macro,infinity,off");
 
     if (!settings.get(android::CameraParameters::KEY_SUPPORTED_EFFECTS))
-        settings.set(android::CameraParameters::KEY_SUPPORTED_EFFECTS, "none,mono,sepia,negative,solarize,red-tint,green-tint,blue-tint");
+        settings.set(android::CameraParameters::KEY_SUPPORTED_EFFECTS, "none,mono,sepia,negative,solarize,red-tint,blue-tint,green-tint");
 //incandescent,warm-fluorescent,cloudy-daylight,twilight,shade,red-eye,torch,fireworks,sports,party,candlelight,50hz,60hz
 
-    if (!settings.get(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES))
-        settings.set(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES,
-                     "auto,portrait,landscape,action,night-portrait,sunset,steadyphoto");
+//    if (!settings.get(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES))
+//       settings.set(android::CameraParameters::KEY_SUPPORTED_SCENE_MODES,
+//                     "auto,portrait,landscape,action,night-portrait,sunset,steadyphoto");
 
     if (!settings.get(android::CameraParameters::KEY_EXPOSURE_COMPENSATION))
         settings.set(android::CameraParameters::KEY_EXPOSURE_COMPENSATION, "0");
@@ -556,7 +559,7 @@ void CameraHAL_FixupParams(struct camera_device * device, CameraParameters &sett
         settings.set("zoom-ratios", "100,200,300,400,500,600");
 
     //if (!settings.get("max-zoom"))
-        settings.set("max-zoom", "4");
+        settings.set("max-zoom", "5");
 
     /* defy: required to prevent panorama crash, but require also opengl ui */
     const char *fps_range_values = "(1000,30000),(1000,25000),(1000,20000),"
@@ -673,7 +676,6 @@ int camera_set_preview_window(struct camera_device * device, struct preview_stre
         LOGE("%s: could not set buffer count", __FUNCTION__);
         return -1;
     }
-
     CameraParameters params(lcdev->hwif->getParameters());
     params.getPreviewSize(&lcdev->previewWidth, &lcdev->previewHeight);
     int hal_pixel_format = HAL_PIXEL_FORMAT;
@@ -847,6 +849,7 @@ int camera_cancel_picture(struct camera_device * device) {
 }
 
 int camera_set_parameters(struct camera_device * device, const char *params) {
+LOGE("enter to camera_set_parameters");
     struct legacy_camera_device *lcdev = to_lcdev(device);
     String8 s(params);
     CameraParameters p(s);
@@ -856,6 +859,7 @@ int camera_set_parameters(struct camera_device * device, const char *params) {
 }
 
 char* camera_get_parameters(struct camera_device * device) {
+LOGE("enter to camera_get_parameters");
     struct legacy_camera_device *lcdev = to_lcdev(device);
     char *rc = NULL;
     CameraParameters params(lcdev->hwif->getParameters());
@@ -878,6 +882,7 @@ int camera_send_command(struct camera_device * device, int32_t cmd, int32_t arg0
 }
 
 void camera_release(struct camera_device * device) {
+LOGE("enter to camera_release");
     struct legacy_camera_device *lcdev = to_lcdev(device);
     LOGV("camera_release:\n");
     destroyOverlay(lcdev);
@@ -886,6 +891,7 @@ void camera_release(struct camera_device * device) {
 }
 
 int camera_dump(struct camera_device * device, int fd) {
+LOGE("enter to camera_release");
     struct legacy_camera_device *lcdev = to_lcdev(device);
     LOGV("camera_dump:\n");
     Vector<String16> args;

@@ -1,12 +1,12 @@
 # Required tools and blobs for bootmenu
-bm_device = device/motorola/jordan
+bm_device = device/moto/kobe
 
 PRODUCT_PACKAGES += \
 	bootmenu \
 	utility_lsof \
 	static_busybox \
 	static_logwrapper \
-	2nd-init.jordan \
+	2nd-init.kobe \
 
 # config
 PRODUCT_COPY_FILES += \
@@ -104,5 +104,5 @@ PRODUCT_COPY_FILES += \
 
 # recovery tools
 PRODUCT_COPY_FILES += \
-	out/target/product/jordan/recovery/root/sbin/tune2fs:system/bootmenu/recovery/sbin/tune2fs
+	out/target/product/kobe/recovery/root/sbin/tune2fs:system/bootmenu/recovery/sbin/tune2fs
 

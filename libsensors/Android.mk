@@ -21,17 +21,13 @@ ifneq ($(TARGET_SIMULATOR),true)
 # hw/<SENSORS_HARDWARE_MODULE_ID>.<ro.product.board>.so
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := sensors.jordan
+LOCAL_MODULE := sensors.kobe
 
 LOCAL_MODULE_PATH := $(TARGET_OUT_SHARED_LIBRARIES)/hw
 
 LOCAL_MODULE_TAGS := eng debug
 
 LOCAL_CFLAGS := -DLOG_TAG=\"Sensors\"
-
-ifneq ($(BOARD_DEFY_MODEL),DEFY_FROYO)
-LOCAL_CFLAGS += -DDEFYPLUS
-endif
 
 LOCAL_SRC_FILES := \
 	sensors.c \

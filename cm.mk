@@ -14,30 +14,30 @@
 # limitations under the License.
 #
 
-$(call inherit-product, device/motorola/jordan/full_jordan.mk)
+$(call inherit-product, device/moto/kobe/full_kobe.mk)
 
 # Inherit some common CM9 stuff.
 $(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product-if-exists, vendor/cm/config/gsm.mk)
 
-PRODUCT_NAME := cm_jordan
+PRODUCT_NAME := cm_kobe
 PRODUCT_BRAND := MOTO
-PRODUCT_DEVICE := jordan
-PRODUCT_MODEL := MB525
+PRODUCT_DEVICE := kobe
+PRODUCT_MODEL := MB520
 PRODUCT_MANUFACTURER := Motorola
-PRODUCT_SFX := DFP
+PRODUCT_SFX := FFW
 
 # Release name and versioning
-    PRODUCT_RELEASE_NAME := Defy
+    PRODUCT_RELEASE_NAME := Bravo
 
 UTC_DATE := $(shell date +%s)
 DATE     := $(shell date +%Y%m%d)
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=${PRODUCT_MODEL}_${PRODUCT_SFX} \
-    TARGET_DEVICE=umts_jordan \
-    BUILD_FINGERPRINT=MOTO/MB526_O2DE/umts_jordan:2.3.6/4.5.1-134_DFP-132/1317968148:user/release-keys \
-    PRIVATE_BUILD_DESC="umts_jordan_emara-user 2.3.6 4.5.1-134_DFP-132 1317968148 release-keys" \
+    TARGET_DEVICE=umts_kobe \
+    BUILD_FINGERPRINT=MOTO/MB520_O2DE/umts_kobe:2.3.6/4.5.1-134_DFP-132/1317968148:user/release-keys \
+    PRIVATE_BUILD_DESC="umts_kobe_emara-user 2.3.6 4.5.1-134_DFP-132 1317968148 release-keys" \
     BUILD_NUMBER=${DATE} \
     BUILD_VERSION_TAGS=release-keys \
     TARGET_BUILD_TYPE=user
