@@ -4,7 +4,7 @@
 # cyanogen / CyanogenDefy / Atrix-Dev-Team
 #
 
-echo "Jordan SQUISHER"
+echo "Kobe SQUISHER"
 echo "================"
 
 DEVICE_OUT=$ANDROID_BUILD_TOP/out/target/product/kobe
