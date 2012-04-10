@@ -48,7 +48,7 @@ using namespace std;
 
 #include "CameraHardwareInterface.h"
 
-//#define YUV_CAM_FORMAT CameraParameters::PIXEL_FORMAT_YUV422I
+#define YUV_CAM_FORMAT CameraParameters::PIXEL_FORMAT_YUV422I
 
 #define DISPLAY_RGB565
 
@@ -61,7 +61,7 @@ using namespace std;
 #endif
 
 //Atrix :
-#define YUV_CAM_FORMAT CameraParameters::PIXEL_FORMAT_YUV420P
+//define YUV_CAM_FORMAT CameraParameters::PIXEL_FORMAT_YUV420P
 
 /* Prototypes and extern functions. */
 extern "C" android::sp<android::CameraHardwareInterface> HAL_openCameraHardware(int cameraId);
@@ -513,16 +513,11 @@ void CameraHAL_FixupParams(struct camera_device * device, CameraParameters &sett
      * it advertises so, but then sends "yuv422i-yuyv"
      * But nvidia tegra ones does...
      */
-LOGE("CameraParameters::KEY_VIDEO_FRAME_FORMAT, YUV_CAM_FORMAT");
     settings.set(CameraParameters::KEY_VIDEO_FRAME_FORMAT, YUV_CAM_FORMAT);
-LOGE("CameraParameters::KEY_SUPPORTED_PREVIEW_FORMATS, YUV_CAM_FORMAT)");
     settings.set(CameraParameters::KEY_SUPPORTED_PREVIEW_FORMATS, YUV_CAM_FORMAT);
-LOGE("YUV_CAM_FORMAT");
     settings.setPreviewFormat(YUV_CAM_FORMAT);
-LOGE("preview-size-values");
     if (!settings.get("preview-size-values"))
         settings.set("preview-size-values", "320x240,352x288,640x480");
-LOGE("picture-size-values");
     if (!settings.get("picture-size-values"))
         settings.set("picture-size-values", "176x144,320x240,640x480,1280x960,1600x1200,2048x1536");
 
