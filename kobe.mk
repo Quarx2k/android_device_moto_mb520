@@ -102,7 +102,7 @@ PRODUCT_PACKAGES += VisualizationWallpapers librs_jni
 PRODUCT_PACKAGES += DroidSSHd dropbear dropbearkey sftp-server scp ssh
 
 # CM9 apps
-PRODUCT_PACKAGES += Trebuchet FileManager Torch
+PRODUCT_PACKAGES += Trebuchet FileManager
 
 # copy all vendor (motorola) kernel modules to system/lib/modules
 PRODUCT_COPY_FILES += $(shell test -d vendor/motorola/kobe/lib/modules &&  \
