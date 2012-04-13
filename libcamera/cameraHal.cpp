@@ -803,7 +803,7 @@ LOGE("enter to camera_release");
     LOGV("camera_release:\n");
     destroyOverlay(lcdev);
     //clearHardwareIntf(lcdev);
-    lcdev->hwif->release();
+    //lcdev->hwif->release();
 }
 
 int camera_dump(struct camera_device * device, int fd) {
@@ -826,8 +826,8 @@ int camera_device_close(hw_device_t* device) {
             free(camera_ops);
             camera_ops = NULL;
         }
-        destroyOverlay(lcdev);
-        lcdev->overlay->destroy();
+       // destroyOverlay(lcdev);
+       // lcdev->overlay->destroy();
         free(lcdev);
         rc = NO_ERROR;
     }
