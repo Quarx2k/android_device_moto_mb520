@@ -1,5 +1,4 @@
-/* vim:et:sts=4:sw=4
- *
+/*
  * Copyright (C) 2012, rondoval (ms2), Epsylon3 (defy)
  * Copyright (C) 2012, Won-Kyu Park
  * Copyright (C) 2012, Raviprasad V Mummidi
@@ -31,8 +30,13 @@
  */
 
 #define LOG_TAG "CameraHAL"
+<<<<<<< HEAD
 #define LOG_NDEBUG 0
 #define LOG_FULL_PARAMS
+=======
+//#define LOG_NDEBUG 0
+//#define LOG_FULL_PARAMS
+>>>>>>> 6bff139... cleanup camera lib
 //#define LOG_EACH_FRAMES
 
 //#define STORE_METADATA_IN_BUFFER
@@ -515,7 +519,6 @@ void CameraHAL_FixupParams(struct camera_device * device, CameraParameters &sett
   settings.set(CameraParameters::KEY_SUPPORTED_PREVIEW_FPS_RANGE, "(5000,30000),(5000,25000),(5000,20000),(5000,24000),(5000,15000),(5000,10000)");
   settings.set(CameraParameters::KEY_PREVIEW_FPS_RANGE, "5000,30000");
   settings.set(CameraParameters::KEY_PREFERRED_PREVIEW_SIZE_FOR_VIDEO, "640x480");
-
     LOGD("Parameters fixed up");
 }
 
