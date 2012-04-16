@@ -143,3 +143,5 @@ BOARD_USES_AUDIO_LEGACY := true
 TARGET_PROVIDES_LIBAUDIO := true
 BOARD_USE_KINETO_COMPATIBILITY := true
 
+# Beware: set only prebuilt OR source+config
+TARGET_PREBUILT_KERNEL := $(ANDROID_BUILD_TOP)/device/moto/kobe/kernel

@@ -30,13 +30,8 @@
  */
 
 #define LOG_TAG "CameraHAL"
-<<<<<<< HEAD
-#define LOG_NDEBUG 0
-#define LOG_FULL_PARAMS
-=======
 //#define LOG_NDEBUG 0
 //#define LOG_FULL_PARAMS
->>>>>>> 6bff139... cleanup camera lib
 //#define LOG_EACH_FRAMES
 
 //#define STORE_METADATA_IN_BUFFER
