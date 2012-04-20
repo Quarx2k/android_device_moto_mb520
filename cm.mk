@@ -14,11 +14,14 @@
 # limitations under the License.
 #
 
-$(call inherit-product, device/moto/kobe/full_kobe.mk)
 
-# Inherit some common CM9 stuff.
+
+
+TARGET_BOOTANIMATION_NAME := vertical-480x854
+
 $(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product-if-exists, vendor/cm/config/gsm.mk)
+$(call inherit-product, device/moto/kobe/full_kobe.mk)
 
 PRODUCT_NAME := cm_kobe
 PRODUCT_BRAND := MOTO
