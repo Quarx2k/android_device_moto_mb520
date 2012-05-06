@@ -92,7 +92,7 @@ PRODUCT_PACKAGES += libOMX.TI.WMA.decode libOMX.TI.Video.Decoder libOMX.TI.Video
 PRODUCT_PACKAGES += libfnc DefyParts Usb 
 
 # Core stuff
-PRODUCT_PACKAGES += charge_only_mode mot_boot_mode lights.jordan sensors.jordan
+PRODUCT_PACKAGES += charge_only_mode mot_boot_mode lights.kobe sensors.kobe
 
 # Publish that we support the live wallpaper feature.
 PRODUCT_PACKAGES += LiveWallpapers LiveWallpapersPicker MagicSmokeWallpapers 
