@@ -76,6 +76,9 @@ hwui.whitelist=com.android.browser
 # (unused if whitelist is different from 0)
 hwui.blacklist=
 
+# CpuGovernorService (require ondemand cpu governor)
+dev.pm.dyn_samplingrate=1
+
 #=========================================================================================
 # Note about persist.xxx properties :
 #
