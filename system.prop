@@ -69,12 +69,11 @@ ro.product.use_charge_counter=1
 # all/choice
 hwui.print_config=choice
 
-# limit the usage of hw renderer to the listed processes only (0 - any)
+# disable hw renderer by default for stability, except for browser
+# Limited to 91 chars ! You can also use "*" and place files named
+# by process names in /data/local/hwui.allow/ (or use HWA Selector app)
 hwui.whitelist=com.android.browser
-
-# disable the usage of hw renderer for the listed processes
-# (unused if whitelist is different from 0)
-hwui.blacklist=
+hwui.blacklist=0
 
 # CpuGovernorService (require ondemand cpu governor)
 dev.pm.dyn_samplingrate=1
