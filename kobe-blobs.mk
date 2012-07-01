@@ -14,10 +14,6 @@
 
 DEVICE_PREBUILT := device/moto/kobe/prebuilt
 
-#temporary cm9 bootanimation
-PRODUCT_COPY_FILES += \
-	$(DEVICE_PREBUILT)/bootanimation.zip:system/media/bootanimation.zip 
-
 PRODUCT_COPY_FILES += \
 	$(DEVICE_PREBUILT)/etc/terminfo/l/linux:system/etc/terminfo/l/linux \
 	$(DEVICE_PREBUILT)/etc/terminfo/x/xterm:system/etc/terminfo/x/xterm 
@@ -43,10 +39,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/moto/kobe/bootmenu/recovery/recovery.fstab:system/etc/recovery.fstab \
 	$(DEVICE_PREBUILT)/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
-	$(DEVICE_PREBUILT)/etc/init.d/02ipv6:system/etc/init.d/02ipv6 \
+	$(DEVICE_PREBUILT)/etc/init.d/02baseband:system/etc/init.d/02baseband \
 	$(DEVICE_PREBUILT)/etc/init.d/03firstboot:system/etc/init.d/03firstboot \
+	$(DEVICE_PREBUILT)/etc/init.d/04filesystems:system/etc/init.d/04filesystems \
 	$(DEVICE_PREBUILT)/etc/init.d/05mountsd:system/etc/init.d/05mountsd \
-	$(DEVICE_PREBUILT)/etc/init.d/07camera:system/etc/init.d/07camera \
 	$(DEVICE_PREBUILT)/etc/init.d/08backlight:system/etc/init.d/08backlight \
 	$(DEVICE_PREBUILT)/etc/init.d/10gpiofix:system/etc/init.d/10gpiofix \
 	$(DEVICE_PREBUILT)/etc/init.d/90multitouch:system/etc/init.d/90multitouch \
@@ -63,12 +59,6 @@ PRODUCT_COPY_FILES += \
 	device/moto/kobe/media_profiles.xml:system/etc/media_profiles.xml \
 	device/moto/kobe/modules/modules.alias:system/lib/modules/modules.alias \
 	device/moto/kobe/modules/modules.dep:system/lib/modules/modules.dep \
-
-
-ifdef CM_RELEASE
-	PRODUCT_COPY_FILES += device/moto/kobe/custom_backup_release.txt:system/etc/custom_backup_list.txt
-else
-	PRODUCT_COPY_FILES += device/moto/kobe/custom_backup_list.txt:system/etc/custom_backup_list.txt
-endif
-
+	${device_path}/releasetools/addon.d/70-gapps.sh:system/addon.d/70-gapps.sh \
+	${device_path}/releasetools/addon.d/70-multiboot.sh:system/addon.d/70-multiboot.sh \
 #end of kobe-blobs.mk

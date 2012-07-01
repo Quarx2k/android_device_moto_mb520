@@ -72,6 +72,7 @@ param_safe()
   export vsel1=30
   export vsel2=46
   export vsel3=52
+  export vsel4=58
   export scaling=2
   export ond_up_threshold=86
   export ond_sampling_rate=50000
@@ -244,14 +245,16 @@ set_ioscheduler()
 
 set_overclock_table()
 {
-  echo "$vsel3" > /proc/overclock/max_vsel
-  echo "${clk3}000" > /proc/overclock/max_rate
+  echo "$vsel4" > /proc/overclock/max_vsel
+  echo "${clk4}000" > /proc/overclock/max_rate
+  echo "4 ${clk4}000000 $vsel4" > /proc/overclock/mpu_opps
   echo "3 ${clk3}000000 $vsel3" > /proc/overclock/mpu_opps
   echo "2 ${clk2}000000 $vsel2" > /proc/overclock/mpu_opps
   echo "1 ${clk1}000000 $vsel1" > /proc/overclock/mpu_opps
   echo "0 ${clk4}000" > /proc/overclock/freq_table
   echo "1 ${clk3}000" > /proc/overclock/freq_table
   echo "2 ${clk2}000" > /proc/overclock/freq_table
+  echo "3 ${clk1}000" > /proc/overclock/freq_table
 }
 
 #############################################################
