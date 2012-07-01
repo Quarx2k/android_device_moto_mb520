@@ -39,7 +39,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
 	device/moto/kobe/bootmenu/recovery/recovery.fstab:system/etc/recovery.fstab \
 	$(DEVICE_PREBUILT)/etc/init.d/01sysctl:system/etc/init.d/01sysctl \
-	$(DEVICE_PREBUILT)/etc/init.d/02baseband:system/etc/init.d/02baseband \
 	$(DEVICE_PREBUILT)/etc/init.d/03firstboot:system/etc/init.d/03firstboot \
 	$(DEVICE_PREBUILT)/etc/init.d/04filesystems:system/etc/init.d/04filesystems \
 	$(DEVICE_PREBUILT)/etc/init.d/05mountsd:system/etc/init.d/05mountsd \
@@ -59,6 +58,6 @@ PRODUCT_COPY_FILES += \
 	device/moto/kobe/media_profiles.xml:system/etc/media_profiles.xml \
 	device/moto/kobe/modules/modules.alias:system/lib/modules/modules.alias \
 	device/moto/kobe/modules/modules.dep:system/lib/modules/modules.dep \
-	${device_path}/releasetools/addon.d/70-gapps.sh:system/addon.d/70-gapps.sh \
-	${device_path}/releasetools/addon.d/70-multiboot.sh:system/addon.d/70-multiboot.sh \
+	device/moto/kobe/releasetools/addon.d/70-gapps.sh:system/addon.d/70-gapps.sh \
+	device/moto/kobe/releasetools/addon.d/70-multiboot.sh:system/addon.d/70-multiboot.sh \
 #end of kobe-blobs.mk
