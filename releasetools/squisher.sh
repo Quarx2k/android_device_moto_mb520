@@ -46,5 +46,6 @@ cp -f $DEVICE_OUT/utilities/lsof $REPACK/ota/system/bootmenu/binary/lsof
 # ril fix
 cp -f $REPACK/ota/system/lib/hw/audio.a2dp.default.so $REPACK/ota/system/lib/liba2dp.so
 
-# battd
-cp -f $VENDOR_TOP/lib/libkobecamera.so $REPACK/ota/system/lib/libsoccamera.so
+# Kobe blobs
+cp -f $VENDOR_TOP/kobe/libkobecamera.so $REPACK/ota/system/lib/libsoccamera.so
+cp -f $VENDOR_TOP/kobe/mot_ise_imager_cfg.bin $REPACK/ota/system/etc/mot_ise_imager_cfg.bin
