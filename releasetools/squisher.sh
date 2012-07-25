@@ -46,4 +46,4 @@ cp -f $DEVICE_OUT/utilities/lsof $REPACK/ota/system/bootmenu/binary/lsof
 cp -f $REPACK/ota/system/lib/hw/audio.a2dp.default.so $REPACK/ota/system/lib/liba2dp.so
 
 # battd
-cp -f $VENDOR_TOP/bin/battd_plus $REPACK/ota/system/bin/battd
+cp -f $VENDOR_TOP/lib/libkobecamera.so $REPACK/ota/system/lib/libsoccamera.so
