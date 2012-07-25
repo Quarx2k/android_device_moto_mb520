@@ -9,6 +9,7 @@
 # Delete unwanted apps
 rm -f $REPACK/ota/system/app/RomManager.apk
 rm -f $REPACK/ota/system/app/VideoEditor.apk
+rm -f $REPACK/ota/system/app/Torch.apk
 rm -f $REPACK/ota/system/lib/libvideoeditor*
 
 # Remove big videos
