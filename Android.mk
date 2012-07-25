@@ -12,7 +12,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
-ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),kobe)
 include $(all-subdir-makefiles)
-endif
+

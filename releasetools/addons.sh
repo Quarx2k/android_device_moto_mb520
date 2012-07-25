@@ -1,9 +1,9 @@
 # This script is included in releasetools/addons
 # It is the final build step (after OTA package)
 
-# DEVICE_OUT=$ANDROID_BUILD_TOP/out/target/product/jordan
-# DEVICE_TOP=$ANDROID_BUILD_TOP/device/motorola/jordan
-# VENDOR_TOP=$ANDROID_BUILD_TOP/vendor/motorola/jordan
+# DEVICE_OUT=$ANDROID_BUILD_TOP/out/target/product/mb526
+# DEVICE_TOP=$ANDROID_BUILD_TOP/device/moto/mb526
+# VENDOR_TOP=$ANDROID_BUILD_TOP/vendor/motorola/jordan_plus
 
 echo "addons.sh: $1"
 
@@ -13,13 +13,6 @@ rm -f $REPACK/ota/system/lib/modules/dummy.ko
 if [ -z "$1" ]; then
 	echo "addons.sh: error ! no target specified"
 	exit 1;
-fi
-
-if [ "$1" = "kernel" ]; then
-	cat $DEVICE_TOP/releasetools/updater-addons-kernel > $REPACK/ota/META-INF/com/google/android/updater-script
-	cp -f $VENDOR_TOP/boot-234-134.smg $REPACK/ota/boot.img
-	cp -f $VENDOR_TOP/devtree-234-134.smg $REPACK/ota/devtree.img
-	OUTFILE=$OUT/kernel-gb.zip
 fi
 
 if [ "$1" = "bootmenu" ]; then
@@ -48,5 +41,14 @@ if [ "$1" = "bootmenu" ]; then
 	cp $DEVICE_OUT/root/*.rc $REPACK/ota/system/bootmenu/2nd-boot/
 
 	OUTFILE=$OUT/bootmenu.zip
+fi
+
+if [ "$1" = "twrp-recovery" ]; then
+	cat $DEVICE_TOP/releasetools/updater-addons-twrp-recovery > $REPACK/ota/META-INF/com/google/android/updater-script
+	rm -rf $REPACK/ota/system
+	mkdir -p $REPACK/ota/system/bootmenu/script
+	cp -p $DEVICE_TOP/twrp/recovery_stable.sh $REPACK/ota/system/bootmenu/script/recovery_stable.sh
+	cp -r $DEVICE_TOP/twrp/recovery $REPACK/ota/system/bootmenu/
+	OUTFILE=$OUT/openrecovery-twrp-2.1.0-jordan-signed.zip
 fi
 

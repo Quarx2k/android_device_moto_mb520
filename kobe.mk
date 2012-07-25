@@ -15,123 +15,17 @@
 #
 
 #
-# This is the product configuration for a generic Motorola Bravo (kobe)
+# This is the product configuration for a generic Motorola Defy (jordan)
 #
 
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
+$(call inherit-product, device/moto/jordan-common/device.mk)
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
+	ro.url.safetylegal=http://www.motorola.com/staticfiles/Support/legal/?model=MB520 \
 	ro.media.capture.maxres=3m \
 	ro.media.capture.classification=classA \
-	ro.media.capture.flip=horizontalandvertical \
-	ro.com.google.locationfeatures=1 \
-	ro.telephony.call_ring.multiple=false \
-	ro.telephony.call_ring.delay=3000 \
-	ro.url.safetylegal=http://www.motorola.com/staticfiles/Support/legal/?model=MB520 \
-	ro.media.dec.jpeg.memcap=20000000 \
-	dalvik.vm.lockprof.threshold=500 \
-	ro.kernel.android.checkjni=0 \
-	dalvik.vm.checkjni=false \
-	dalvik.vm.dexopt-data-only=1 \
-	ro.vold.umsdirtyratio=20 \
-	net.dns1=8.8.8.8 \
-	net.dns2=8.8.4.4
 
-# we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
-
-DEVICE_PACKAGE_OVERLAYS += device/moto/kobe/overlay
-
-# Permissions
-PRODUCT_COPY_FILES += \
-	frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-	frameworks/base/data/etc/android.hardware.camera.flash-autofocus.xml:system/etc/permissions/android.hardware.camera.flash-autofocus.xml \
-	frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-	frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-	frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-	frameworks/base/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
-	frameworks/base/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
-	frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-	frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-	frameworks/base/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-	frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-	packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml \
-
-# ICS sound
-PRODUCT_PACKAGES += \
-	hcitool hciattach hcidump \
-	libaudioutils audio.a2dp.default audio_policy.kobe \
-	libaudiohw_legacy audio.primary.kobe \
-
-# TO FIX for ICS
-#PRODUCT_PACKAGES += gralloc.kobe hwcomposer.kobe
-#PRODUCT_PACKAGES += gralloc.default hwcomposer.default
-
-# ICS Camera
-PRODUCT_PACKAGES += Camera camera.kobe
-
-# Wifi packages
-PRODUCT_PACKAGES += iwmulticall hostap wlan_loader wlan_cu wpa_supplicant
-PRODUCT_PACKAGES += libhostapdcli libCustomWifi libwpa_client libtiOsLib
-PRODUCT_PACKAGES += tiwlan.ini dhcpcd.conf wpa_supplicant.conf hostapd.conf
-PRODUCT_PACKAGES += tiap_loader tiap_cu ndc
-
-# OMX stuff
-PRODUCT_PACKAGES += dspexec libbridge libLCML libOMX_Core
-PRODUCT_PACKAGES += libOMX.TI.AAC.encode libOMX.TI.AAC.decode libOMX.TI.AMR.decode
-PRODUCT_PACKAGES += libOMX.TI.WBAMR.encode libOMX.TI.MP3.decode libOMX.TI.WBAMR.decode
-PRODUCT_PACKAGES += libOMX.TI.WMA.decode libOMX.TI.Video.Decoder libOMX.TI.Video.encoder
-#PRODUCT_PACKAGES += libOMX.TI.VPP
-#PRODUCT_PACKAGES += libskiahw libOMX.TI.JPEG.Encoder libOMX.TI.JPEG.decoder
-
-# Kobe stuff
-PRODUCT_PACKAGES += libfnc DefyParts Usb 
-
-# Core stuff
-PRODUCT_PACKAGES += charge_only_mode mot_boot_mode lights.kobe sensors.kobe
-
-# Publish that we support the live wallpaper feature.
-PRODUCT_PACKAGES += LiveWallpapers LiveWallpapersPicker MagicSmokeWallpapers 
-PRODUCT_PACKAGES += VisualizationWallpapers librs_jni
-
-# Add DroidSSHd (dropbear) Management App - tpruvot/android_external_droidsshd @ github
-PRODUCT_PACKAGES += DroidSSHd dropbear dropbearkey sftp-server scp ssh
-
-# CM9 apps
-PRODUCT_PACKAGES += FileManager Torch
-PRODUCT_PACKAGES += Androidian Apollo
-
-# Experimental TI OpenLink
-PRODUCT_PACKAGES += libnl_2 iw
-
-# copy all vendor (motorola) kernel modules to system/lib/modules
-PRODUCT_COPY_FILES += $(shell test -d vendor/motorola/kobe/lib/modules &&  \
-	find vendor/motorola/kobe/lib/modules -name '*.ko' \
-	-printf '%p:system/lib/modules/%f ')
-
-# copy all others kernel modules under the "modules" directory to system/lib/modules
-PRODUCT_COPY_FILES += $(shell test -d device/moto/kobe/modules && \
-	find device/moto/kobe/modules -name '*.ko' \
-	-printf '%p:system/lib/modules/%f ')
-
-# Prebuilt boot.img
-LOCAL_KERNEL := device/moto/kobe/kernel
-PRODUCT_COPY_FILES += \
-	$(LOCAL_KERNEL):kernel
-
-# Blobs and bootmenu stuff
-$(call inherit-product, device/moto/kobe/kobe-blobs.mk)
-$(call inherit-product, device/moto/kobe/bootmenu/bootmenu.mk)
-
-######################################################################################################################################
-
-$(call inherit-product, build/target/product/full_base.mk)
-
-# Should be after the full_base include, which loads languages_full
-PRODUCT_LOCALES += hdpi
-
-PRODUCT_NAME := full_kobe
-PRODUCT_DEVICE := MB520
 

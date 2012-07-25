@@ -1,21 +1,18 @@
 # This script is included in squisher
 # It is the final build step (after OTA package)
 
-#DEVICE_OUT=$ANDROID_BUILD_TOP/out/target/product/kobe
-#DEVICE_TOP=$ANDROID_BUILD_TOP/device/moto/kobe
-#VENDOR_TOP=$ANDROID_BUILD_TOP/vendor/motorola/kobe
+# set in squisher
+# DEVICE_OUT=$ANDROID_BUILD_TOP/out/target/product/mb526
+# DEVICE_TOP=$ANDROID_BUILD_TOP/device/moto/mb526
+# VENDOR_TOP=$ANDROID_BUILD_TOP/vendor/motorola/jordan_plus
 
 # Delete unwanted apps
 rm -f $REPACK/ota/system/app/RomManager.apk
 rm -f $REPACK/ota/system/app/VideoEditor.apk
+rm -f $REPACK/ota/system/lib/libvideoeditor*
 
 # Remove big videos
 rm -f $REPACK/ota/system/media/video/*.480p.mp4
-
-# Apk required, (forbidden in product copy files in ics)
-cp $DEVICE_TOP/prebuilt/app/basebandswitcherV4.0.apk $REPACK/ota/system/app/BasebandSwitcher.apk
-
-cp -f $VENDOR_TOP/app/* $REPACK/ota/system/app/
 
 # these scripts are not required or bad
 rm -f $REPACK/ota/system/etc/init.d/04modules
@@ -27,23 +24,19 @@ chmod +x $REPACK/ota/system/bin/mount_ext3.sh
 mkdir -p $REPACK/ota/system/etc/terminfo/x
 cp $REPACK/ota/system/etc/terminfo/l/linux $REPACK/ota/system/etc/terminfo/x/xterm
 
-# keep multiboot specific files, if installed
-cat $DEVICE_TOP/releasetools/multiboot_backup_list.txt >> $REPACK/ota/system/etc/custom_backup_list.txt
-
 # prebuilt boot, devtree, logo & updater-script
 
 rm -f $REPACK/ota/boot.img
 
-cp -f $DEVICE_TOP/updater-script $REPACK/ota/META-INF/com/google/android/updater-script
+cp -f $DEVICE_COMMON/updater-script $REPACK/ota/META-INF/com/google/android/updater-script
 
 # Opensource init binary
 cp -f $DEVICE_OUT/root/init $REPACK/ota/system/bootmenu/2nd-init/init
 
 # Use a prebuilt adbd configured for root access instead of normal one, for dev purpose
 cp -f $REPACK/ota/system/bootmenu/binary/adbd $REPACK/ota/system/bin/adbd
-#cp -f $DEVICE_OUT/root/sbin/adbd $REPACK/ota/system/bin/adbd
 
-cp -f $DEVICE_TOP/bootmenu/binary/2nd-init $REPACK/ota/system/bootmenu/binary/2nd-init
+cp -f $DEVICE_COMMON/bootmenu/binary/2nd-init $REPACK/ota/system/bootmenu/binary/2nd-init
 
 # use the static busybox as bootmenu shell, and some static utilities
 cp -f $DEVICE_OUT/utilities/busybox $REPACK/ota/system/bootmenu/binary/busybox
@@ -52,3 +45,5 @@ cp -f $DEVICE_OUT/utilities/lsof $REPACK/ota/system/bootmenu/binary/lsof
 # ril fix
 cp -f $REPACK/ota/system/lib/hw/audio.a2dp.default.so $REPACK/ota/system/lib/liba2dp.so
 
+# battd
+cp -f $VENDOR_TOP/bin/battd_plus $REPACK/ota/system/bin/battd

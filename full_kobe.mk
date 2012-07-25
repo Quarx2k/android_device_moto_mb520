@@ -22,11 +22,12 @@
 #
 
 # Inherit from those products. Most specific first.
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-$(call inherit-product, frameworks/base/build/phone-hdpi-512-dalvik-heap.mk)
-$(call inherit-product, device/moto/kobe/kobe.mk)
-# Also get non-open-source files if available
-$(call inherit-product-if-exists, vendor/motorola/kobe/kobe-vendor.mk)
+$(call inherit-product, device/moto/mb520/kobe.mk)
+
+# copy all vendor (motorola) kernel modules to system/lib/modules
+PRODUCT_COPY_FILES += $(shell test -d vendor/motorola/jordan-common/lib/modules &&  \
+	find vendor/motorola/jordan-common/lib/modules -name '*.ko' \
+	-printf '%p:system/lib/modules/%f ')
 
 PRODUCT_NAME := full_kobe
 PRODUCT_DEVICE := kobe
