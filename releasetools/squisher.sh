@@ -46,3 +46,5 @@ cp -f $DEVICE_OUT/utilities/lsof $REPACK/ota/system/bootmenu/binary/lsof
 # ril fix
 cp -f $REPACK/ota/system/lib/hw/audio.a2dp.default.so $REPACK/ota/system/lib/liba2dp.so
 
+# Media Profiles
+cp -f $DEVICE_TOP/media_profiles.xml $REPACK/ota/system/etc/media_profiles.xml
