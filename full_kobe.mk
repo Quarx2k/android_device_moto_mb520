@@ -24,13 +24,8 @@
 # Inherit from those products. Most specific first.
 $(call inherit-product, device/moto/mb520/kobe.mk)
 
-# copy all vendor (motorola) kernel modules to system/lib/modules
-PRODUCT_COPY_FILES += $(shell test -d vendor/motorola/jordan-common/lib/modules &&  \
-	find vendor/motorola/jordan-common/lib/modules -name '*.ko' \
-	-printf '%p:system/lib/modules/%f ')
-
-PRODUCT_NAME := full_kobe
-PRODUCT_DEVICE := kobe
+PRODUCT_NAME := full_mb520
+PRODUCT_DEVICE := mb520
 PRODUCT_BRAND := Android
 PRODUCT_MODEL := MB520
 PRODUCT_MANUFACTURER := motorola
