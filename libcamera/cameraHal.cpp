@@ -32,7 +32,7 @@
 
 #define LOG_TAG "CameraHAL"
 //#define LOG_NDEBUG 0
-#define LOG_FULL_PARAMS
+//#define LOG_FULL_PARAMS
 //#define LOG_EACH_FRAME
 
 #include <hardware/camera.h>
@@ -71,6 +71,11 @@ struct legacy_camera_device {
     int32_t                        previewHeight;
     Overlay::Format                previewFormat;
 };
+
+#define CAMHAL_GRALLOC_USAGE GRALLOC_USAGE_HW_TEXTURE | \
+                             GRALLOC_USAGE_HW_RENDER | \
+                             GRALLOC_USAGE_SW_READ_RARELY | \
+                             GRALLOC_USAGE_SW_WRITE_NEVER
 
 /** camera_hw_device implementation **/
 static inline struct legacy_camera_device * to_lcdev(struct camera_device *dev)
@@ -167,6 +172,8 @@ static void Yuv422iToRgb565(char* rgb, char* yuv422i, int width, int height, int
 static void Yuv422iToYV12 (unsigned char* dest, unsigned char* src, int width, int height, int stride) 
 {
     int i, j;
+    int paddingY = stride - width;
+    int paddingC = paddingY / 2;
     unsigned char *src1;
     unsigned char *udest, *vdest;
 
@@ -178,13 +185,14 @@ static void Yuv422iToYV12 (unsigned char* dest, unsigned char* src, int width, i
             *dest++ = src1[2];
             src1 += 4;
         }
+        dest += paddingY;
     }
 
     /* copy the U and V values */
     src1 = src + width * 2;		/* next line */
 
     vdest = dest;
-    udest = dest + width * height / 4;
+    udest = dest + stride * height / 4;
 
     for (i = 0; i < height; i += 2) {
         for (j = 0; j < width; j += 2) {
@@ -195,6 +203,8 @@ static void Yuv422iToYV12 (unsigned char* dest, unsigned char* src, int width, i
         }
         src = src1;
         src1 += width * 2;
+        udest += paddingC;
+        vdest += paddingC;
     }
 }
 
@@ -215,11 +225,11 @@ static void processPreviewData(char *frame, size_t size, legacy_camera_device *l
         ALOGE("%s: ERROR dequeueing the buffer\n", __FUNCTION__);
         return;
     }
-
+/*
     if (stride != lcdev->previewWidth) {
         ALOGE("%s: stride=%d doesn't equal width=%d", __FUNCTION__, stride, lcdev->previewWidth);
     }
-
+*/
     ret = lcdev->window->lock_buffer(lcdev->window, bufHandle);
     if (ret != NO_ERROR) {
         ALOGE("%s: ERROR locking the buffer\n", __FUNCTION__);
@@ -231,9 +241,7 @@ static void processPreviewData(char *frame, size_t size, legacy_camera_device *l
     void *vaddr;
 
     do {
-        ret = lcdev->gralloc->lock(lcdev->gralloc, *bufHandle,
-                                   GRALLOC_USAGE_SW_WRITE_OFTEN | GRALLOC_USAGE_HW_TEXTURE | GRALLOC_USAGE_HW_RENDER,
-                                   0, 0, lcdev->previewWidth, lcdev->previewHeight, &vaddr);
+        ret = lcdev->gralloc->lock(lcdev->gralloc, *bufHandle, CAMHAL_GRALLOC_USAGE, 0, 0,lcdev->previewWidth, lcdev->previewHeight, &vaddr);
         tries--;
         if (ret) {
             ALOGW("%s: gralloc lock retry", __FUNCTION__);
@@ -438,7 +446,7 @@ static int camera_set_preview_window(struct camera_device * device, struct previ
     ALOGD("%s: preview format %s", __FUNCTION__, previewFormat);
     lcdev->previewFormat = Overlay::getFormatFromString(previewFormat);
 
-    if (window->set_usage(window, GRALLOC_USAGE_SW_WRITE_OFTEN | GRALLOC_USAGE_SW_READ_OFTEN)) {
+    if (window->set_usage(window, CAMHAL_GRALLOC_USAGE)) {
         ALOGE("%s: could not set usage on gralloc buffer", __FUNCTION__);
         return -1;
     }
@@ -625,27 +633,6 @@ static char* camera_get_parameters(struct camera_device * device)
     struct legacy_camera_device *lcdev = to_lcdev(device);
     CameraParameters params(lcdev->hwif->getParameters());
 
-    int width = 0, height = 0;
-
-    params.getPictureSize(&width, &height);
-    if (width > 0 && height > 0) {
-        float ratio = (height * 1.0) / width;
-
-        if (ratio < 0.70 && width >= 640) {
-            params.setPreviewSize(848, 480);
-            params.set(CameraParameters::KEY_PREFERRED_PREVIEW_SIZE_FOR_VIDEO, "848x480");
-        } else if (width == 848) {
-            params.setPreviewSize(640, 480);
-            params.set(CameraParameters::KEY_PREFERRED_PREVIEW_SIZE_FOR_VIDEO, "640x480");
-        }
-
-        ALOGV("%s: target size %dx%d, ratio %f", __FUNCTION__, width, height, ratio);
-    }
-
-    params.getPreviewSize(&width, &height);
-    if (width != lcdev->previewWidth || height != lcdev->previewHeight) {
-        camera_set_preview_window(device, lcdev->window);
-    }
 
 #ifdef LOG_FULL_PARAMS
     ALOGV("%s: Parameters");
@@ -818,4 +805,5 @@ camera_module_t HAL_MODULE_INFO_SYM = {
     get_number_of_cameras: android::get_number_of_cameras,
     get_camera_info: android::get_camera_info,
 };
+
 
