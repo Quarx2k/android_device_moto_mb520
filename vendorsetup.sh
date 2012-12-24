@@ -22,4 +22,4 @@
 
 #add_lunch_combo full_jordan-eng
 #add_lunch_combo full_jordan-userdebug
-
+add_lunch_combo cm_mb520-userdebug
