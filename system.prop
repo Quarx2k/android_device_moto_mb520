@@ -52,7 +52,7 @@ ro.cwm.forbid_format=/misc,/devtree,/config,/boot,/recovery,/pds,/system
 ro.usb.use_custom_service=1
 
 # use 1% battery steps
-persist.sys.one_percent_batt=1
+ro.product.use_charge_counter=1
 
 # DDMS debug SurfaceFlinger (EGL)
 # debug.sf.ddms=1
