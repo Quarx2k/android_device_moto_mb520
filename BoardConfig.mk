@@ -26,7 +26,7 @@
 include device/moto/jordan-common/BoardConfig.mk
 TARGET_USE_JORDAN_COMMON := true
 TARGET_BOOTLOADER_BOARD_NAME :=  kobe
-TARGET_KERNEL_CONFIG  := mapphone_kobe_defconfig
+TARGET_KERNEL_CONFIG  := mb520_cm10_defconfig
 TARGET_CUSTOM_RELEASETOOL := ./device/moto/mb520/releasetools/squisher
 
 
