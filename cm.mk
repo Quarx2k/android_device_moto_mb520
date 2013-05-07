@@ -18,28 +18,28 @@ TARGET_BOOTANIMATION_NAME := 480
 
 $(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product-if-exists, vendor/cm/config/gsm.mk)
-$(call inherit-product-if-exists, device/moto/mb520/full_kobe.mk)
+$(call inherit-product, device/moto/mb520/full_jordan.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/moto/mb520/overlay
 
 PRODUCT_NAME := cm_mb520
-PRODUCT_BRAND := MOTO
+PRODUCT_BRAND := motorola
 PRODUCT_DEVICE := mb520
 PRODUCT_MODEL := MB520
-PRODUCT_MANUFACTURER := Motorola
-PRODUCT_SFX := DFP
-
-# Release name and versioning
-PRODUCT_RELEASE_NAME := Kobe
+PRODUCT_MANUFACTURER := MOTO
+PRODUCT_RELEASE_NAME := Motorola Bravo
+PRODUCT_SFX := umts
 
 UTC_DATE := $(shell date +%s)
-DATE     := $(shell date +%Y%m%d)
+DATE := $(shell date +%Y%m%d)
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=${PRODUCT_MODEL}_${PRODUCT_SFX} \
-    TARGET_DEVICE=umts_jordan \
-    BUILD_FINGERPRINT=MOTO/MB526_O2DE/umts_jordan:2.3.6/4.5.1-134_DFP-132/1317968148:user/release-keys \
-    PRIVATE_BUILD_DESC="umts_jordan_emara-user 2.3.6 4.5.1-134_DFP-132 1317968148 release-keys" \
-    BUILD_NUMBER=${DATE} \
-    BUILD_VERSION_TAGS=release-keys \
-    TARGET_BUILD_TYPE=user
+   PRODUCT_NAME=${PRODUCT_DEVICE}_${PRODUCT_SFX} \
+   BUILD_NUMBER=${DATE} \
+   TARGET_DEVICE=${PRODUCT_DEVICE} \
+   BUILD_FINGERPRINT=${PRODUCT_BRAND}/${PRODUCT_DEVICE}_${PRODUCT_SFX}/${PRODUCT_DEVICE}:${PLATFORM_VERSION}/${BUILD_ID}/${DATE}:user/release-keys \
+   PRIVATE_BUILD_DESC="${PRODUCT_DEVICE}-user ${PLATFORM_VERSION} ${BUILD_ID} ${DATE} release-keys" \
+   PRODUCT_BRAND=${PRODUCT_BRAND} \
+   BUILD_UTC_DATE= \
+   PRODUCT_DEFAULT_LANGUAGE=en \
+   PRODUCT_DEFAULT_REGION=US \
