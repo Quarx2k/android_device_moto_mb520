@@ -18,7 +18,7 @@ TARGET_BOOTANIMATION_NAME := 480
 
 $(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product-if-exists, vendor/cm/config/gsm.mk)
-$(call inherit-product, device/moto/mb520/full_jordan.mk)
+$(call inherit-product, device/moto/mb520/full_kobe.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/moto/mb520/overlay
 
