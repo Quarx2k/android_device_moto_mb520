@@ -29,4 +29,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.media.capture.maxres=3m \
 	ro.media.capture.classification=classA \
 
+PRODUCT_COPY_FILES += \
+	${device_path}/media_profiles.xml:system/etc/media_profiles.xml \
 
