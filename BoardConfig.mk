@@ -23,11 +23,12 @@
 # WARNING: This line must come *before* including the proprietary
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
-include device/moto/jordan-common/BoardConfig.mk
+
+# Model variant (DEFY_FROYO, DEFY_GINGER, DEFY_PLUS)
+BOARD_DEFY_MODEL := DEFY_PLUS
 TARGET_USE_JORDAN_COMMON := true
-TARGET_BOOTLOADER_BOARD_NAME :=  kobe
-TARGET_KERNEL_CONFIG  := mb520_cm10_defconfig
-TARGET_CUSTOM_RELEASETOOL := ./device/moto/mb520/releasetools/squisher
+TARGET_KERNEL_CONFIG  := mapphone_defconfig
 
-
+# Use the part that is common between all allwinner
+include device/moto/jordan-common/BoardConfig.mk
 

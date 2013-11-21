@@ -15,8 +15,9 @@
 #
 
 #
-# This is the product configuration for a generic Motorola Defy (jordan)
+# This is the product configuration for a generic Motorola Bravo (kobe)
 #
+device_path = device/moto/mb520
 
 # The gps config appropriate for this device
 $(call inherit-product, device/common/gps/gps_eu_supl.mk)
@@ -25,9 +26,12 @@ $(call inherit-product, vendor/motorola/kobe/kobe-vendor.mk)
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
-	ro.media.capture.maxres=3m \
-	ro.media.capture.classification=classA \
+	ro.url.safetylegal=http://www.motorola.com/staticfiles/Support/legal/?model=MB520 \
+	ro.media.capture.maxres=5m \
+	ro.media.capture.flash=led \
+	ro.media.capture.flashIntensity=41 \
+	ro.media.capture.torchIntensity=25 \
+	ro.media.capture.classification=classE
 
 PRODUCT_COPY_FILES += \
 	${device_path}/media_profiles.xml:system/etc/media_profiles.xml \
-
