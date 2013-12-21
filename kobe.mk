@@ -35,4 +35,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 PRODUCT_COPY_FILES += \
 	${device_path}/media_profiles.xml:system/etc/media_profiles.xml \
-	${device_path}/devtree:system/bootmenu/2nd-boot/devtree \
+	${device_path}/devtree:system/bootmenu/2nd-boot/devtree
