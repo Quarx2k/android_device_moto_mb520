@@ -13,14 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+$(call inherit-product, device/moto/mb520/full_mb520.mk)
 
-TARGET_BOOTANIMATION_NAME := 480
+# Inherit some common CM stuff
+$(call inherit-product, vendor/cm/config/gsm.mk)
 
-$(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
-$(call inherit-product-if-exists, vendor/cm/config/gsm.mk)
-$(call inherit-product, device/moto/mb520/full_kobe.mk)
-
-DEVICE_PACKAGE_OVERLAYS += device/moto/mb520/overlay
+# Inherit some common CM stuff.
+$(call inherit-product, vendor/cm/config/common_full_phone.mk)
 
 PRODUCT_NAME := cm_mb520
 PRODUCT_BRAND := motorola

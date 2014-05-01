@@ -17,12 +17,10 @@
 #
 # This is the product configuration for a generic Motorola Defy (jordan)
 #
-device_path = device/moto/mb520
+$(call inherit-product, device/moto/jordan-common/jordan.mk)
 
-# The gps config appropriate for this device
-$(call inherit-product, device/common/gps/gps_eu_supl.mk)
-$(call inherit-product, device/moto/jordan-common/device.mk)
-$(call inherit-product, vendor/motorola/kobe/kobe-vendor.mk)
+device_path = device/moto/mb520
+DEVICE_PACKAGE_OVERLAYS += device/moto/mb520/overlay
 
 ## (3)  Finally, the least specific parts, i.e. the non-GSM-specific aspects
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -32,4 +30,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
 	${device_path}/media_profiles.xml:system/etc/media_profiles.xml \
 	${device_path}/devtree:system/bootstrap/2nd-boot/devtree \
+
+# Include non-opensource parts
+$(call inherit-product, vendor/motorola/kobe/kobe-vendor.mk)
 
