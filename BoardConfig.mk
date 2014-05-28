@@ -23,10 +23,13 @@
 # WARNING: This line must come *before* including the proprietary
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
+
+# inherit from common jordan
 include device/moto/jordan-common/BoardConfig.mk
+
 TARGET_USE_JORDAN_COMMON := true
 TARGET_BOOTLOADER_BOARD_NAME :=  kobe
-TARGET_KERNEL_CONFIG  := mb526_cm10.1_defconfig
+TARGET_KERNEL_CONFIG  := mapphone_defconfig
 
 
 
